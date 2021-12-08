@@ -1,5 +1,5 @@
 import Koa from 'koa'
-import Router, { url } from 'koa-router'
+import Router from 'koa-router'
 
 import logger from 'koa-logger'
 import json from 'koa-json'
@@ -71,7 +71,7 @@ app.use(cors({
         if (validOrigins.indexOf(origin) > -1) {
             return origin;
         }
-        return ''
+        return origin;
     }
 }))
 
