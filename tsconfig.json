@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "outDir": "./dist",
+    "strict": true,
+    "lib": ["es5", "es6"],
+    "esModuleInterop": true,
+    "types": ["koa"],
+    "module": "commonjs"
+  },
+  "include": ["./src/**/*"]
+}
