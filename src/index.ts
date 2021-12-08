@@ -15,6 +15,8 @@ const app = new Koa();
 const router = new Router()
 
 router.get('/', async (ctx, next) => {
+    console.log('origin: ', ctx.request.href)
+
     let views: View[] = [];
     try {
         views = await prisma.view.findMany();
@@ -43,7 +45,7 @@ router.get('/view/total', async (ctx, next) => {
 })
 
 
-router.post('/', async (ctx, next) => {
+router.post('/view/', async (ctx, next) => {
     try {
         await prisma.view.create({
             data: {
@@ -66,7 +68,7 @@ app.use(bodyParser())
 
 app.use(cors({
     origin(request) {
-        const origin = request.origin;
+        const origin = request.headers['referer'] || '';
         const validOrigins = ['http://localhost:8080', "*.ybr54323.github.io.com"]
         if (validOrigins.indexOf(origin) > -1) {
             return origin;
