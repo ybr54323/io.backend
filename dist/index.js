@@ -138,7 +138,14 @@ app.use((0, koa_json_1["default"])());
 app.use((0, koa_logger_1["default"])());
 app.use((0, koa_bodyparser_1["default"])());
 app.use((0, koa_cors_1["default"])({
-    origin: '*.github.io'
+    origin: function (request) {
+        var origin = request.origin;
+        var validOrigins = ['http://localhost:8080', "*.ybr54323.github.io.com"];
+        if (validOrigins.indexOf(origin) > -1) {
+            return origin;
+        }
+        return '';
+    }
 }));
 app.use(router.routes()).use(router.allowedMethods());
 app.listen(3000, function () {

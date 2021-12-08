@@ -1,5 +1,5 @@
 import Koa from 'koa'
-import Router from 'koa-router'
+import Router, { url } from 'koa-router'
 
 import logger from 'koa-logger'
 import json from 'koa-json'
@@ -64,13 +64,18 @@ app.use(json())
 app.use(logger())
 app.use(bodyParser())
 
-
 app.use(cors({
-    origin: '*.github.io'
+    origin(request) {
+        const origin = request.origin;
+        const validOrigins = ['http://localhost:8080', "*.ybr54323.github.io.com"]
+        if (validOrigins.indexOf(origin) > -1) {
+            return origin;
+        }
+        return ''
+    }
 }))
 
 app.use(router.routes()).use(router.allowedMethods())
-
 
 app.listen(3000, () => {
     console.log("started")

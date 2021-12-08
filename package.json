@@ -17,7 +17,9 @@
     "koa-cors": "0.0.16",
     "koa-json": "^2.0.2",
     "koa-logger": "^3.2.1",
-    "koa-router": "^10.1.1"
+    "koa-proxy": "^1.0.0-alpha.3",
+    "koa-router": "^10.1.1",
+    "pm2": "^5.1.2"
   },
   "devDependencies": {
     "@types/koa-bodyparser": "^4.3.4",
