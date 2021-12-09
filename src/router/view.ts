@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 import { PrismaClient, View } from '@prisma/client'
 const prisma = new PrismaClient();
-const router = new Router({ prefix: 'view' })
+const router = new Router({ prefix: '/view' })
 router
     .get('/', async (ctx, next) => {
         console.log('origin: ', ctx.request.href)
