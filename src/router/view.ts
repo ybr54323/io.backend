@@ -6,7 +6,7 @@ const router = new Router({ prefix: '/view' })
 
 // 只有这个页面才能调
 const validReferer = async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
-    if (ctx.header.referer !== 'https://ybr54323.github.io') return { code: 403 };
+    if (ctx.headers.referer !== 'https://ybr54323.github.io') return { code: 403 };
     await next();
 }
 
