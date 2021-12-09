@@ -12,7 +12,7 @@ const validReferer = () => {
     }
 }
 
-router.use(validReferer())
+// router.use(validReferer())
 
 router
     .get('/', async (ctx, next) => {
@@ -27,7 +27,7 @@ router
 
         ctx.body = { views }
         await next()
-    })
+    }, validReferer())
     .get('/total', async (ctx, next) => {
         let count = 0;
         try {
@@ -40,7 +40,7 @@ router
 
         ctx.body = { count }
         await next()
-    })
+    }, validReferer())
     .post('/', async (ctx, next) => {
         try {
             await prisma.view.create({
@@ -56,6 +56,6 @@ router
 
         ctx.body = { code: 0 }
         await next()
-    })
+    }, validReferer())
 
 export default router
