@@ -8,7 +8,7 @@ const router = new Router({ prefix: '/view' })
 const validReferer = () => {
     return async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
         const referer = ctx.headers['referer'] || ctx.headers['Referer'] || '';
-        if (referer !== 'https://ybr54323.github.io') return ctx.body = { code: 403 };
+        if (referer !== 'https://ybr54323.github.io/') return ctx.body = { code: 403 };
         await next();
     }
 }
