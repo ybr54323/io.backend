@@ -73,12 +73,13 @@ app.use(bodyParser())
 
 app.use(cors({
     origin(request) {
-        const origin = request.headers['referer'] || '';
-        const validOrigins = ['http://localhost:8080', "*.ybr54323.github.io.com"]
-        if (validOrigins.indexOf(origin) > -1) {
-            return origin;
-        }
-        return origin;
+        return '*';
+        // const origin = request.headers['referer'] || '';
+        // const validOrigins = ['http://localhost:8080', "*.ybr54323.github.io.com"]
+        // if (validOrigins.indexOf(origin) > -1) {
+        //     return origin;
+        // }
+        // return origin;
     }
 }))
 
@@ -87,9 +88,15 @@ app.use(router.routes()).use(router.allowedMethods())
 // app.listen(3000, () => {
 //     console.log("started")
 // })
-http.createServer(app.callback()).listen(80, () => {
-    console.log('80 started')
-})
-https.createServer(app.callback()).listen(443, () => {
+// http.createServer(app.callback()).listen(80, () => {
+//     console.log('80 started')
+// })
+
+const options = {
+    key: fs.readFileSync('../ssl/api.io.ybr543.com.key'),
+    cert: fs.readFileSync('../ssl/api.io.ybr543.com.pem')
+};
+
+https.createServer(options, app.callback()).listen(443, () => {
     console.log('443 started')
 })
