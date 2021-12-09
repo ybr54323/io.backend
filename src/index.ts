@@ -49,7 +49,7 @@ router.get('/view/total', async (ctx, next) => {
 })
 
 
-router.post('/view/', async (ctx, next) => {
+router.post('/view', async (ctx, next) => {
     try {
         await prisma.view.create({
             data: {
