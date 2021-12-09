@@ -4,15 +4,16 @@ import { PrismaClient, View } from '@prisma/client'
 const prisma = new PrismaClient();
 const router = new Router({ prefix: '/view' })
 
-// 只有这个页面才能调
+// 只有github.io页面才能调
 const validReferer = () => {
     return async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
-        if (ctx.headers.referer !== 'https://ybr54323.github.io') return { code: 403 };
+        const referer = ctx.headers['referer'] || ctx.headers['Referer'] || '';
+        if (referer !== 'https://ybr54323.github.io') return ctx.body = { code: 403 };
         await next();
     }
 }
 
-// router.use(validReferer())
+router.use(validReferer())
 
 router
     .get('/', async (ctx, next) => {
@@ -27,7 +28,7 @@ router
 
         ctx.body = { views }
         await next()
-    }, validReferer())
+    })
     .get('/total', async (ctx, next) => {
         let count = 0;
         try {
@@ -40,7 +41,7 @@ router
 
         ctx.body = { count }
         await next()
-    }, validReferer())
+    })
     .post('/', async (ctx, next) => {
         try {
             await prisma.view.create({
@@ -56,6 +57,6 @@ router
 
         ctx.body = { code: 0 }
         await next()
-    }, validReferer())
+    })
 
 export default router

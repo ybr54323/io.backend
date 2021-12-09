@@ -11,7 +11,6 @@ import routing from './router'
 const app = new Koa();
 
 
-app.use(enforceHttps())
 app.use(json())
 app.use(logger())
 app.use(bodyParser())
@@ -29,6 +28,8 @@ const options = {
     cert: fs.readFileSync('./ssl/api.io.ybr543.com.pem')
 };
 
+
+app.use(enforceHttps())
 https.createServer(options, app.callback()).listen(443, () => {
     console.log('443 started');
 })
