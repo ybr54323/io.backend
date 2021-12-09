@@ -1,11 +1,18 @@
+import Koa from 'koa'
 import Router from 'koa-router'
 import { PrismaClient, View } from '@prisma/client'
 const prisma = new PrismaClient();
 const router = new Router({ prefix: '/view' })
-router
-    .get('/', async (ctx, next) => {
-        console.log('origin: ', ctx.request.href)
 
+// 只有这个页面才能调
+const validReferer = (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
+    if (ctx.header.referer !== 'https://ybr54323.github.io') return { code: 403 };
+    next();
+}
+
+router
+    .use(validReferer)
+    .get('/', async (ctx, next) => {
         let views: View[] = [];
         try {
             views = await prisma.view.findMany();
