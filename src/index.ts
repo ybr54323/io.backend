@@ -1,5 +1,9 @@
 import Koa from 'koa'
 import Router from 'koa-router'
+import http from 'http'
+import https from 'https'
+import fs from 'fs'
+import enforceHttps from 'koa-sslify'
 
 import logger from 'koa-logger'
 import json from 'koa-json'
@@ -62,6 +66,7 @@ router.post('/view/', async (ctx, next) => {
     await next()
 })
 
+app.use(enforceHttps())
 app.use(json())
 app.use(logger())
 app.use(bodyParser())
@@ -79,6 +84,12 @@ app.use(cors({
 
 app.use(router.routes()).use(router.allowedMethods())
 
-app.listen(3000, () => {
-    console.log("started")
+// app.listen(3000, () => {
+//     console.log("started")
+// })
+http.createServer(app.callback()).listen(80, () => {
+    console.log('80 started')
+})
+https.createServer(app.callback()).listen(443, () => {
+    console.log('443 started')
 })
