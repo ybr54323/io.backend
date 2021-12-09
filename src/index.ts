@@ -16,7 +16,7 @@ app.use(json())
 app.use(logger())
 app.use(bodyParser())
 app.use(cors({
-    origin: "*.ybr54323.github.io"
+    origin: ".*ybr54323.github.io"
 }))
 routing(app)
 
