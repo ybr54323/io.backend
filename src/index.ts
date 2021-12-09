@@ -93,8 +93,8 @@ app.use(router.routes()).use(router.allowedMethods())
 // })
 
 const options = {
-    key: fs.readFileSync('../ssl/api.io.ybr543.com.key'),
-    cert: fs.readFileSync('../ssl/api.io.ybr543.com.pem')
+    key: fs.readFileSync('./ssl/api.io.ybr543.com.key'),
+    cert: fs.readFileSync('./ssl/api.io.ybr543.com.pem')
 };
 
 https.createServer(options, app.callback()).listen(443, () => {
