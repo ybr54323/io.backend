@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 const router = new Router({ prefix: '/view' })
 
 // 只有这个页面才能调
-const validReferer = (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
+const validReferer = async (ctx: Koa.ParameterizedContext, next: Koa.Next) => {
     if (ctx.header.referer !== 'https://ybr54323.github.io') return { code: 403 };
-    next();
+    await next();
 }
 
 router
