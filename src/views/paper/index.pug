@@ -1,0 +1,17 @@
+doctype html
+html  
+    head 
+        title note
+
+        style
+            include css/index.css
+    body
+        script
+            include js/index.js
+        //- textarea#paper(name="" cols="100" rows="100" placeholder="请输入内容") #{content}
+        h1.title 速记纸
+        div#paper.paper(contenteditable='true') #{content}
+
+        script(src="https://unpkg.com/axios/dist/axios.min.js")
+        script
+            include js/index.js

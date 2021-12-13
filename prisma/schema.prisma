@@ -15,3 +15,9 @@ model View {
   createdAt DateTime @default(now()) @db.Timestamp(6)
   ip        String   @db.VarChar(255)
 }
+
+model Paper {
+  id      Int     @id @default(autoincrement())
+  code    String  @unique @db.VarChar(10)
+  content String? @db.LongText
+}
