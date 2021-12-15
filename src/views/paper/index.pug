@@ -2,15 +2,34 @@ doctype html
 html  
     head 
         title note
-
+        meta(name="viewport" content="width=device-width, initial-scale=1.0, maxium-scale=1.0, user-scalable=no;")
         style
             include css/index.css
     body
         script
             include js/index.js
-        //- textarea#paper(name="" cols="100" rows="100" placeholder="请输入内容") #{content}
         h1.title 速记纸
+            span.icon ？
         div#paper.paper(contenteditable='true') #{content}
+        div.mask
+            div.box
+                h1!='《速记纸》'
+                h3 功能：
+                p 一个跨端之间复制黏贴的中转站
+                br
+                h3 使用方法：
+                em 方法1
+                li 将您要复制到别的端的内容黏贴到这
+                li!='记住<strong>当前网址</strong>'
+                li 在目的端打开当前这个网址，您的内容就在上面
+                em 方法2
+                li 更改网址上的4位数，改成您自己想要的口令，然后跳转
+                li!='参考上面的<strong>方法1</strong>'
+                br
+                h3 为什么做这个东西：
+                p 在日常的研发里，经常需要在不同端中调试h5，往往h5链接都是很大一坨，基本上只能通过微信，来中转这些链接。
+                p 在不同端中切换登录微信，是很麻烦的，所以有感而发，实现了这个复制粘贴中转站。 
+
 
         script(src="https://unpkg.com/axios/dist/axios.min.js")
         script
