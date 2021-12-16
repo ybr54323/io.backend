@@ -17,10 +17,6 @@ const render = views('./src/views', { extension: 'pug' })
 
 const app = new Koa();
 
-// app.use((ctx) => {
-//     console.log(ctx.request)
-// })
-
 app.use(serve('./public/'));
 app.use(render)
 app.use(json())
