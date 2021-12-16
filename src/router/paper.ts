@@ -3,7 +3,7 @@ import { PrismaClient } from '.prisma/client'
 
 const prisma = new PrismaClient()
 
-const router = new Router({ prefix: '/paper' })
+const router = new Router()
 
 const generateCode = (count: number): string => {
     const strs = '0123456789'
