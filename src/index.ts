@@ -17,7 +17,9 @@ const render = views('./src/views', { extension: 'pug' })
 
 const app = new Koa();
 app.keys = ['yangbingrui', 'new bee']
-app.use(serve('./public/'));
+app.use(serve('./public/', {
+    maxage: 1000 * 60 * 60 * 24 * 5
+}));
 app.use(render)
 app.use(json())
 app.use(logger())
