@@ -18,10 +18,12 @@ const generateCode = (count: number): string => {
 router.get('/', async (ctx, next) => {
     const code = ctx.cookies.get("code") || null;
     if (!code) {
-        return ctx.redirect('/paper/random')
+        return ctx.redirect('/random')
     }
-    ctx.redirect(`/paper/${code}`)
-}).get('/random', async (ctx, next) => {
+    ctx.redirect(`/${code}`)
+})
+
+router.get('/random', async (ctx, next) => {
     let fin = false;
     let code = '';
     while (!fin) {
@@ -42,10 +44,12 @@ router.get('/', async (ctx, next) => {
             fin = true
         }
     }
-    ctx.redirect(`/paper/${code}`)
-}).get('/:code', async (ctx, next) => {
+    ctx.redirect(`/${code}`)
+})
+
+router.get('/:code', async (ctx, next) => {
     const code = ctx.params.code || ''
-    if (!code) ctx.redirect('/paper/');
+    if (!code) ctx.redirect('/');
     const existedPaper = await prisma.paper.findUnique({
         where: {
             code
@@ -56,12 +60,17 @@ router.get('/', async (ctx, next) => {
         httpOnly: true,
         sameSite: true,
         overwrite: true,
+        signed: true,
+        secure: true,
+        maxAge: 1000 * 60 * 60 * 24
     })
     await ctx.render('paper', { content: existedPaper?.content || '' })
-}).post('/', async (ctx, next) => {
+})
+
+router.post('/', async (ctx, next) => {
     const { content = '' } = ctx.request.body;
     const code = ctx.cookies.get("code");
-    if (!code) return await ctx.redirect('/paper/random');
+    if (!code) return await ctx.redirect('/random');
     await prisma.paper.update({
         where: { code },
         data: { content }

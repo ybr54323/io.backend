@@ -16,7 +16,7 @@ const render = views('./src/views', { extension: 'pug' })
 
 
 const app = new Koa();
-
+app.keys = ['yangbingrui', 'new bee']
 app.use(serve('./public/'));
 app.use(render)
 app.use(json())
