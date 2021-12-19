@@ -9,7 +9,7 @@ const generateCode = (count: number): string => {
     const strs = '0123456789'
     let code = ''
     while (count > 0) {
-        code += strs[Math.round(Math.random() * strs.length)]
+        code += strs[Math.floor(Math.random() * strs.length)]
         count--;
     }
     return code;
@@ -28,13 +28,14 @@ router.get('/random', async (ctx, next) => {
     let code = '';
     while (!fin) {
         code = generateCode(4);
-        console.log("code: ", code)
+        // console.log("code: ", code)
         let existedPaper = await prisma.paper.findUnique({
             where: {
                 code
             }
         });
         if (existedPaper === null) {
+            console.log(code)
             await prisma.paper.create({
                 data: {
                     code,
@@ -61,7 +62,7 @@ router.get('/:code', async (ctx, next) => {
         sameSite: true,
         overwrite: true,
         signed: true,
-        secure: true,
+        // secure: true,
         maxAge: 1000 * 60 * 60 * 24
     })
     await ctx.render('paper', { content: existedPaper?.content || '' })
