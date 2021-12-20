@@ -14,8 +14,8 @@ model View {
 }
 
 model Paper {
-  id      Int     @id @default(autoincrement())
-  code    String  @unique @db.VarChar(10)
-  content String? @db.LongText
+  id        Int      @id @default(autoincrement())
+  code      String   @unique @db.VarChar(10)
+  content   String?  @db.LongText
   createdAt DateTime @default(now()) @db.Timestamp(6)
 }
