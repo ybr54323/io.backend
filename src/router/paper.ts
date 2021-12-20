@@ -68,7 +68,7 @@ router.get('/:code', async (ctx, next) => {
     await ctx.render('paper', { content: existedPaper?.content || '' })
 })
 
-router.post('/', async (ctx, next) => {
+router.post('/paper', async (ctx, next) => {
     const { content = '' } = ctx.request.body;
     const code = ctx.cookies.get("code");
     if (!code) return await ctx.redirect('/random');
