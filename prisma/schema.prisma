@@ -13,9 +13,9 @@ model View {
   ip        String   @db.VarChar(255)
 }
 
-model Note {
-  id        Int      @id @default(autoincrement())
+model Paper {
+  id      Int     @id @default(autoincrement())
+  code    String  @unique @db.VarChar(10)
+  content String? @db.LongText
   createdAt DateTime @default(now()) @db.Timestamp(6)
-  path      String   @db.VarChar(255) @unique
-  content   String?   @db.LongText
 }

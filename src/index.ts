@@ -7,10 +7,20 @@ import json from 'koa-json'
 import bodyParser from 'koa-bodyparser'
 import cors from 'koa-cors'
 import routing from './router'
+import views from 'koa-views'
+import serve from 'koa-static'
+
+
+
+const render = views('./src/views', { extension: 'pug' })
+
 
 const app = new Koa();
-
-
+app.keys = ['yangbingrui', 'new bee']
+app.use(serve('./public/', {
+    maxage: 1000 * 60 * 60 * 24 * 5
+}));
+app.use(render)
 app.use(json())
 app.use(logger())
 app.use(bodyParser())

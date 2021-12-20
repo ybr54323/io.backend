@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.title {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2em;
+    line-height: 2em;
+}
+
+.icon {
+    display: inline-block;
+    font-size: 1em;
+    color: #999;
+    cursor: pointer;
+    margin: 0 0 0 .5em;
+}
+
+.paper {
+    padding: 2.5em 2.5em;
+    min-height: calc(100vh - 2em);
+    position: relative;
+    margin: 0 auto;
+    border-radius: .5em;
+    background: url('../assets/paper-bg.jpg') center;
+    background-size: 100% auto;
+    z-index: 0;
+    box-shadow: .1em .1em .1em .1em #999;
+}
+
+.paper::after {
+    font-size: 1em;
+    content: '.';
+    display: inline-block;
+    animation: writing 2s infinite;
+}
+
+@keyframes writing {
+    25% {
+        content: '..';
+    }
+
+    50% {
+        content: '...';
+    }
+
+    75% {
+        content: '...';
+    }
+
+    100% {
+        content: '....';
+    }
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    visibility: hidden;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,.8);
+}
+
+.mask--active {
+    visibility: visible;
+    z-index: 2;
+}
+
+.box {
+    width: 75%;
+    padding: 3em;
+    background-color: #fff;
+    border-radius: 2em;
+    box-shadow: .1em .1em .1em .1em #999;
+}
