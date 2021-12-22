@@ -78,6 +78,8 @@
 
 .box {
     width: 75%;
+    max-height: 75vh;
+    overflow: auto;
     padding: 3em;
     background-color: #fff;
     border-radius: 2em;

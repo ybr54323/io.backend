@@ -15,6 +15,7 @@ const generateCode = (count: number): string => {
     return code;
 }
 
+
 router.get('/', async (ctx, next) => {
     const code = ctx.cookies.get("code") || null;
     if (!code) {
